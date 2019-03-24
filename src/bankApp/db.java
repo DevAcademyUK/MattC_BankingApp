@@ -44,7 +44,7 @@ public class db {
         if(authentication(pin)) {
             switch (account) {
                 case 'c' :
-                     balance = Float.toString(cBal);
+                    balance = Float.toString(cBal);
                     break;
                 case 's':
                     balance =  Float.toString(sBal);
@@ -53,13 +53,65 @@ public class db {
                     balance =  Float.toString(jBal);
                     break;
                 default :
-                    balance = "Error, wrong input";
+                    balance = "Error, account does not exist";
             }
-                    } else {
+        } else {
             balance = "Error, access denied";
         }
-            return balance;
+        return balance;
+    }
 
+    public String withdrawal(char account, String pin, Float amount) {
+        String balance = "";
+        if(authentication(pin)) {
 
+            switch (account) {
+                case 'c' :
+                    cBal = cBal - amount;
+                    balance = Float.toString(cBal);
+
+                    break;
+                case 's':
+                    sBal = sBal - amount;
+                    balance = Float.toString(sBal);
+                    break;
+                case 'j':
+                    jBal = jBal - amount;
+                    balance = Float.toString(jBal);
+                    break;
+                default :
+                    balance = "Error, account does not exist";
+            }
+        } else {
+            return "Error, access denied";
+        }
+        return balance;
+
+    }
+
+    public String deposit(char account, String pin, Float amount) {
+        String balance = "";
+        if (authentication(pin)) {
+            switch (account) {
+                case 'c':
+                    cBal = cBal + amount;
+                    balance = Float.toString(cBal);
+
+                    break;
+                case 's':
+                    sBal = sBal + amount;
+                    balance = Float.toString(sBal);
+                    break;
+                case 'j':
+                    jBal = jBal + amount;
+                    balance = Float.toString(jBal);
+                    break;
+                default:
+                    balance = "Error, account does not exist";
+            }
+        } else {
+            return "Error, access denied";
+        }
+        return balance;
     }
 }
