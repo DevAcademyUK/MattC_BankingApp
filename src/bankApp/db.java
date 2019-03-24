@@ -23,11 +23,30 @@ public class db {
 
 
     }
-    public boolean seed(String user) {
+    public boolean seed(String userLogin) {
       //  db userData = new db();
-        String data[] = {"Bob1", "Bob", "Marley", "08/07/47", "1234", "500", "600", "700"};
-        createUser(data);
-        return true;
+        String data[][] = {{"Bob1", "Bob", "Marley", "08/07/47", "1234", "500", "600", "700"},
+                {"Mary1", "Mary", "Marley", "08/07/62", "5678", "200", "800", "1000"},
+                {"Fred1", "Fred", "Jones", "08/07/78", "9876", "4000", "5000", "8000"}};
+
+        int i=0;
+        String user[] = {""};
+        while(i < data.length) {
+            if (data[i][0].equals(userLogin)) {
+                user = data[i];
+                i = data.length;
+            } else {
+                i++;
+            }
+        }
+
+        if (user[0] != "") {
+            createUser(user);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public boolean authentication(String givenPin) {
