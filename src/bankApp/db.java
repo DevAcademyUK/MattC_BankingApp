@@ -114,4 +114,60 @@ public class db {
         }
         return balance;
     }
+
+    public String transfer(char fromAccount, char toAccount, String pin, Float amount) {
+        String result = "";
+        if (authentication(pin)) {
+            switch (fromAccount) {
+                case 'c':
+                    cBal = cBal - amount;
+                    if(toAccount == 's') {
+                        sBal = sBal + amount;
+                        result = "Sucessfully transfered";
+                    } else if (toAccount == 'j')
+                    {
+                        jBal = jBal + amount;
+                        result = "Sucessfully transfered";
+                    } else {
+                        cBal = cBal + amount;
+                        result = "error in transfers";
+                    }
+
+                    break;
+                case 's':
+                    sBal = sBal - amount;
+                    if(toAccount == 'c') {
+                        cBal = cBal + amount;
+                        result = "Sucessfully transfered";
+                    } else if (toAccount == 'j')
+                    {
+                        jBal = jBal + amount;
+                        result = "Sucessfully transfered";
+                    } else {
+                        sBal = sBal + amount;
+                        result = "error in transfers";
+                    }
+                    break;
+                case 'j':
+                    jBal = jBal - amount;
+                    if(toAccount == 's') {
+                        sBal = sBal + amount;
+                        result = "Sucessfully transfered";
+                    } else if (toAccount == 'c')
+                    {
+                        cBal = cBal + amount;
+                        result = "Sucessfully transfered";
+                    } else {
+                        jBal = jBal + amount;
+                        result = "error in transfers";
+                    }
+                    break;
+                default:
+                    result = "Error, account does not exist";
+            }
+        } else {
+            return "Error, access denied";
+        }
+        return result;
+    }
 }

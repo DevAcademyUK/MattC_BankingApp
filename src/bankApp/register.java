@@ -14,8 +14,6 @@ public class register {
     }
     public void userLogin() {
 
-
-
         // Login
         Scanner userInput = new Scanner(System.in);
         System.out.println("What is your login username?");
@@ -63,16 +61,17 @@ public class register {
 
                     break;
                 case 't':
-
+                    System.out.println("What is the account you would like to transfer to?");
+                    char toAccount = myScanner.nextLine().charAt(0);
+                    System.out.println("Please enter the amount");
+                    amount = myScanner.nextLine();
+                    System.out.println(data.transfer(account, toAccount, pin, Float.parseFloat(amount)));
                     break;
             }
             System.out.println("Is there anything else you would like help with? (y)es or (n)o");
           cont = myScanner.nextLine().charAt(0);
 
         } while(cont == 'y');
-
-
-
 
     }
 
